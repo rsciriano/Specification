@@ -23,7 +23,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     /// <inheritdoc/>
     public virtual async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
     {
-        _dbContext.Set<T>().Add(entity);
+        await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
 
         await SaveChangesAsync(cancellationToken);
 
@@ -33,7 +33,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     /// <inheritdoc/>
     public virtual async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
     {
-        _dbContext.Set<T>().AddRange(entities);
+        await _dbContext.Set<T>().AddRangeAsync(entities, cancellationToken);
 
         await SaveChangesAsync(cancellationToken);
 
